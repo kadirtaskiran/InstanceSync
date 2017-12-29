@@ -569,9 +569,9 @@ function KEYANDDEPSEND() {
 # =============================================================================
 function RUNPREPROCESS() {
   echo -e "Running Dependency Scripts on the \033[1;33mTARGET\033[0m Server."
-  SCRIPTS='[ -f "swap.sh" ] && bash swap.sh;
-           [ -f "swappiness.sh" ] && bash swappiness.sh;
-           [ -f "intsalldeps.sh" ] && bash intsalldeps.sh'
+  SCRIPTS='[ -f "/home/ubuntu/swap.sh" ] && bash /home/ubuntu/swap.sh;
+           [ -f "/home/ubuntu/swappiness.sh" ] && bash /home/ubuntu/swappiness.sh;
+           [ -f "/home/ubuntu/intsalldeps.sh" ] && bash /home/ubuntu/intsalldeps.sh'
   ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                          -o StrictHostKeyChecking=no ubuntu@${TIP} \
                          "${SCRIPTS}" > /dev/null 2>&1
