@@ -747,8 +747,8 @@ AMAZONPROCESSES
 
 echo -e "\033[1;36mThe target Instance is being rebooted\033[0m"
 
-ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
-                       -o StrictHostKeyChecking=no root@${TIP} \
+ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
+                       -o StrictHostKeyChecking=no ubuntu@${TIP} \
                        "shutdown -r now &"
 
 echo -e "If you were copying something that was not a Rackspace Cloud Server, 
