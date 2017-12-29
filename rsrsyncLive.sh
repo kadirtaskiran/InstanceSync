@@ -253,26 +253,26 @@ to a more Open Source Platform.
 function AMAZONPROCESSES() {
   if [ "${AK}" == "YES" ];then
     echo -e "\033[1;36mNow performing Amazon Specific Processes\033[0m"
-    T_HOST=$(ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+    T_HOST=$(ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                                     -o StrictHostKeyChecking=no root@${TIP} \
                                     "echo \$( head -1 /etc/issue )")
 
-    ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+    ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                            -o StrictHostKeyChecking=no root@${TIP} \
                            "bash postopfix.sh";
 
-    ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+    ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                            -o StrictHostKeyChecking=no root@${TIP} \
                            "yum -y install initscripts"
 
     if [ "$(echo ${T_HOST} | grep -i centos)" ];then
       TARGET_OS_TYPE="centos"
-      ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+      ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                              -o StrictHostKeyChecking=no root@${TIP} \
                              "yum -y install ${TARGET_OS_TYPE}-release"
     elif [ "$(echo ${T_HOST} | grep -i redhat)" ];then
       TARGET_OS_TYPE="redhat"
-      ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+      ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                              -o StrictHostKeyChecking=no root@${TIP} \
                              "yum -y install ${TARGET_OS_TYPE}-release"
     else
@@ -299,7 +299,7 @@ for pkg in \${PKS};do
     rpm -e --nodeps \$pkg
   fi
 done" | tee /tmp/postopfix.sh
-    scp -i ${SSH_KEY_TEMP} /tmp/postopfix.sh root@${TIP}:/root/
+    scp -i ${SSH_KEY_CN} /tmp/postopfix.sh root@${TIP}:/root/
   fi
 }
 
@@ -550,17 +550,17 @@ function KEYANDDEPSEND() {
 
   if [ -f /tmp/intsalldeps.sh ];then
     echo -e "Passing RSYNC Dependencies to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_TEMP} /tmp/intsalldeps.sh root@${TIP}:/root/
+    scp -i ${SSH_KEY_CN} /tmp/intsalldeps.sh root@${TIP}:/root/
   fi
 
   if [ -f /tmp/swap.sh ];then
     echo -e "Passing  Swap script to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_TEMP} /tmp/swap.sh root@${TIP}:/root/
+    scp -i ${SSH_KEY_CN} /tmp/swap.sh root@${TIP}:/root/
   fi
   
   if [ -f /tmp/swappiness.sh ];then
     echo -e "Passing  Swappiness script to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_TEMP} /tmp/swappiness.sh root@${TIP}:/root/
+    scp -i ${SSH_KEY_CN} /tmp/swappiness.sh root@${TIP}:/root/
   fi
 }
 
@@ -572,7 +572,7 @@ function RUNPREPROCESS() {
   SCRIPTS='[ -f "swap.sh" ] && bash swap.sh;
            [ -f "swappiness.sh" ] && bash swappiness.sh;
            [ -f "intsalldeps.sh" ] && bash intsalldeps.sh'
-  ssh -i ${SSH_KEY_TEMP} -o UserKnownHostsFile=/dev/null \
+  ssh -i ${SSH_KEY_CN} -o UserKnownHostsFile=/dev/null \
                          -o StrictHostKeyChecking=no root@${TIP} \
                          "${SCRIPTS}" > /dev/null 2>&1
 }
@@ -609,7 +609,7 @@ function RUNMAINPROCESS() {
 
   RSYNC="$(which rsync)"
   RSSH_OPTIONS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-  RSSH="ssh -i ${SSH_KEY_TEMP} ${RSSH_OPTIONS}"
+  RSSH="ssh -i ${SSH_KEY_CN} ${RSSH_OPTIONS}"
 
   RUNRSYNCCOMMAND
 
