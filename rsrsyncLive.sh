@@ -546,7 +546,7 @@ function KEYANDDEPSEND() {
   fi
 
   echo -e "Please Enter the Password of the \033[1;33mTARGET\033[0m Server."
-  ssh-copy-id -i ${SSH_KEY_TEMP} root@${TIP}
+  ## ssh-copy-id -i ${SSH_KEY_TEMP} root@${TIP}
 
   if [ -f /tmp/intsalldeps.sh ];then
     echo -e "Passing RSYNC Dependencies to the \033[1;33mTARGET\033[0m Server."
