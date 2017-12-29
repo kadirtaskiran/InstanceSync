@@ -633,7 +633,7 @@ TEMPDIR='/tmp'
 
 # Name of the Temp SSH Key we will be using.
 SSH_KEY_TEMP="${TEMPDIR}/tempssh.${DATE}"
-SSH_KEY_CN="dinein-vir.pem"
+SSH_KEY_CN="/root/.ssh/dinein-vir.pem"
 
 # ROOT SSH Key File
 SSHAUTHKEYFILE='/root/.ssh/authorized_keys'
