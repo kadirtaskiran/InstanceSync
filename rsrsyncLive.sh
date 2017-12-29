@@ -550,17 +550,17 @@ function KEYANDDEPSEND() {
 
   if [ -f /tmp/intsalldeps.sh ];then
     echo -e "Passing RSYNC Dependencies to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_CN} /tmp/intsalldeps.sh ubuntu@${TIP}:/ubuntu/
+    scp -i ${SSH_KEY_CN} /tmp/intsalldeps.sh ubuntu@${TIP}:/home/ubuntu/
   fi
 
   if [ -f /tmp/swap.sh ];then
     echo -e "Passing  Swap script to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_CN} /tmp/swap.sh ubuntu@${TIP}:/ubuntu/
+    scp -i ${SSH_KEY_CN} /tmp/swap.sh ubuntu@${TIP}:/home/ubuntu/
   fi
   
   if [ -f /tmp/swappiness.sh ];then
     echo -e "Passing  Swappiness script to the \033[1;33mTARGET\033[0m Server."
-    scp -i ${SSH_KEY_CN} /tmp/swappiness.sh ubuntu@${TIP}:/ubuntu/
+    scp -i ${SSH_KEY_CN} /tmp/swappiness.sh ubuntu@${TIP}:/home/ubuntu/
   fi
 }
 
